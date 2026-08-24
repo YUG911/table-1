@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>WellPoint | Healthcare Made Simple</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         ANNOUNCEMENT BAR
+    ========================== -->
+
+    <div class="announcement-bar">
+        <p>
+            <i class="fa-solid fa-heart-pulse"></i>
+            Find doctors and book appointments online easily
+        </p>
+    </div>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <!-- LOGO -->
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
+
+                <span>WellPoint</span>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav-links">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="pages/doctors.html">
+                    Find Doctors
+                </a>
+
+                <a href="pages/clinics.html">
+                    Clinics
+                </a>
+
+                <a href="pages/about.html">
+                    About
+                </a>
+
+                <a href="pages/contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- NAV ACTIONS -->
+
+            <div class="nav-actions">
+
+                <a href="pages/login.html"
+                    class="login-btn">
+
+                    Log In
+
+                </a>
+
+
+                <a href="pages/register.html"
+                    class="btn btn-primary">
+
+                    Get Started
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                type="button">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <div class="container hero-container">
+
+
+            <!-- HERO CONTENT -->
+
+            <div class="hero-content">
+
+                <div class="hero-label">
+
+                    <span></span>
+
+                    HEALTHCARE MADE SIMPLE
+
+                </div>
+
+
+                <h1>
+
+                    Find the Right Doctor.
+                    <span>Book with Confidence.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Search doctors, explore clinics,
+                    check availability, and book your
+                    appointment — all in one place.
+
+                </p>
+
+
+                <!-- HERO BUTTONS -->
+
+                <div class="hero-buttons">
+
+                    <a href="pages/doctors.html"
+                        class="btn btn-primary btn-large">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Find a Doctor
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a href="#clinics"
+                        class="btn btn-outline btn-large">
+
+                        Explore Clinics
+
+                    </a>
+
+                </div>
+
+
+                <!-- TRUST ITEMS -->
+
+                <div class="trust-items">
+
+                    <div>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Easy Booking
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Find Doctors
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Save Time
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO IMAGE -->
+
+            <div class="hero-image-wrapper">
+
+                <div class="hero-image-bg"></div>
+
+                <img
+                    src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2"
+                    alt="Doctor">
+
+
+                <div class="appointment-card">
+
+                    <div class="appointment-icon">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4>Easy Appointment</h4>
+
+                        <p>Find → Select → Book</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH SECTION
+    ========================== -->
+
+    <section class="search-section">
+
+        <div class="container">
+
+            <div class="search-box">
+
+
+                <!-- SEARCH DOCTOR -->
+
+                <div class="search-field">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <div>
+
+                        <label for="homeDoctorSearch">
+                            Search Doctor
+                        </label>
+
+                        <input
+                            type="text"
+                            id="homeDoctorSearch"
+                            placeholder="Doctor name or specialization">
+
+                    </div>
+
+                </div>
+
+
+                <!-- SPECIALIZATION -->
+
+                <div class="search-field">
+
+                    <i class="fa-solid fa-stethoscope"></i>
+
+                    <div>
+
+                        <label for="homeSpecialization">
+                            Specialization
+                        </label>
+
+                        <select id="homeSpecialization">
+
+                            <option value="">
+                                Select specialization
+                            </option>
+
+                            <option value="Cardiologist">
+                                Cardiologist
+                            </option>
+
+                            <option value="Dermatologist">
+                                Dermatologist
+                            </option>
+
+                            <option value="General Physician">
+                                General Physician
+                            </option>
+
+                            <option value="Dentist">
+                                Dentist
+                            </option>
+
+                            <option value="Pediatrician">
+                                Pediatrician
+                            </option>
+
+                            <option value="Orthopedic">
+                                Orthopedic
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="search-field">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <div>
+
+                        <label for="homeLocation">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="homeLocation"
+                            placeholder="Select city or location">
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH BUTTON -->
+
+                <button
+                    type="button"
+                    class="btn btn-primary search-btn"
+                    id="homeSearchButton">
+
+                    Search Doctors
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         WHY WELLPOINT
+    ========================== -->
+
+    <section class="section why-section">
+
+        <div class="container">
+
+            <div class="section-heading center">
+
+                <span class="section-label">
+                    WHY WELLPOINT
+                </span>
+
+                <h2>
+                    Healthcare appointments
+                    made easier for you.
+                </h2>
+
+                <p>
+                    Everything you need to find
+                    the right healthcare provider.
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+                    </div>
+
+                    <h3>Find Doctors</h3>
+
+                    <p>
+                        Find the right healthcare
+                        specialist for your needs.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                    </div>
+
+                    <h3>Easy Booking</h3>
+
+                    <p>
+                        Choose an available time
+                        that fits your schedule.
+                    </p>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">
+
+                        <i class="fa-solid fa-hospital"></i>
+
+                    </div>
+
+                    <h3>Explore Clinics</h3>
+
+                    <p>
+                        Discover clinics and
+                        healthcare services easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section class="section how-section">
+
+        <div class="container">
+
+            <div class="section-heading center">
+
+                <span class="section-label">
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Book your appointment
+                    in three easy steps.
+                </h2>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+
+                <!-- STEP 1 -->
+
+                <div class="step-card">
+
+                    <span class="step-number">
+                        01
+                    </span>
+
+                    <div class="step-icon">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </div>
+
+                    <h3>Find a Doctor</h3>
+
+                    <p>
+                        Search and choose the right
+                        doctor for your healthcare needs.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div class="step-card">
+
+                    <span class="step-number">
+                        02
+                    </span>
+
+                    <div class="step-icon">
+
+                        <i class="fa-solid fa-calendar"></i>
+
+                    </div>
+
+                    <h3>Select a Time</h3>
+
+                    <p>
+                        Check availability and choose
+                        a suitable appointment time.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="step-card">
+
+                    <span class="step-number">
+                        03
+                    </span>
+
+                    <div class="step-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <h3>Book Appointment</h3>
+
+                    <p>
+                        Confirm your appointment
+                        quickly and easily.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURED DOCTORS
+    ========================== -->
+
+    <section class="section doctors-section"
+        id="doctors">
+
+        <div class="container">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="section-label">
+                        FEATURED DOCTORS
+                    </span>
+
+                    <h2>
+                        Meet our healthcare professionals
+                    </h2>
+
+                    <p>
+                        Explore doctors and find the right
+                        specialist for your needs.
+                    </p>
+
+                </div>
+
+
+                <a href="pages/doctors.html"
+                    class="text-link">
+
+                    View All Doctors
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="doctors-grid">
+
+
+                <!-- DOCTOR 1 -->
+
+                <article class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d"
+                            alt="Doctor">
+
+                    </div>
+
+
+                    <div class="doctor-info">
+
+                        <h3>Dr. Rahul Sharma</h3>
+
+                        <span>
+                            Cardiologist
+                        </span>
+
+
+                        <div class="doctor-rating">
+
+                            <span>
+
+                                <i class="fa-solid fa-star"></i>
+
+                                4.8
+
+                            </span>
+
+                            <p>120 Reviews</p>
+
+                        </div>
+
+
+                        <p class="doctor-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Ahmedabad, Gujarat
+
+                        </p>
+
+
+                        <a href="pages/doctors.html"
+                            class="doctor-link">
+
+                            View Profile
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DOCTOR 2 -->
+
+                <article class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1594824476967-48c8b964273f"
+                            alt="Doctor">
+
+                    </div>
+
+
+                    <div class="doctor-info">
+
+                        <h3>Dr. Priya Patel</h3>
+
+                        <span>
+                            Dermatologist
+                        </span>
+
+
+                        <div class="doctor-rating">
+
+                            <span>
+
+                                <i class="fa-solid fa-star"></i>
+
+                                4.9
+
+                            </span>
+
+                            <p>98 Reviews</p>
+
+                        </div>
+
+
+                        <p class="doctor-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Mehsana, Gujarat
+
+                        </p>
+
+
+                        <a href="pages/doctors.html"
+                            class="doctor-link">
+
+                            View Profile
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DOCTOR 3 -->
+
+                <article class="doctor-card">
+
+                    <div class="doctor-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1582750433449-648ed127bb54"
+                            alt="Doctor">
+
+                    </div>
+
+
+                    <div class="doctor-info">
+
+                        <h3>Dr. Amit Patel</h3>
+
+                        <span>
+                            General Physician
+                        </span>
+
+
+                        <div class="doctor-rating">
+
+                            <span>
+
+                                <i class="fa-solid fa-star"></i>
+
+                                4.7
+
+                            </span>
+
+                            <p>85 Reviews</p>
+
+                        </div>
+
+
+                        <p class="doctor-location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Ahmedabad, Gujarat
+
+                        </p>
+
+
+                        <a href="pages/doctors.html"
+                            class="doctor-link">
+
+                            View Profile
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CLINICS
+    ========================== -->
+
+    <section class="section clinics-section"
+        id="clinics">
+
+        <div class="container">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="section-label">
+                        EXPLORE CLINICS
+                    </span>
+
+                    <h2>
+                        Find the right clinic
+                        for your healthcare needs
+                    </h2>
+
+                    <p>
+                        Discover clinics and healthcare
+                        providers near you.
+                    </p>
+
+                </div>
+
+
+                <a href="pages/clinics.html"
+                    class="text-link">
+
+                    View All Clinics
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="clinics-grid">
+
+
+                <!-- CLINIC 1 -->
+
+                <article class="clinic-card">
+
+                    <div class="clinic-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d"
+                            alt="Clinic">
+
+                    </div>
+
+
+                    <div class="clinic-info">
+
+                        <h3>
+                            WellPoint Healthcare Clinic
+                        </h3>
+
+                        <p>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Ahmedabad, Gujarat
+
+                        </p>
+
+                        <p>
+
+                            <i class="fa-solid fa-user-doctor"></i>
+
+                            Multiple Doctors Available
+
+                        </p>
+
+
+                        <a href="pages/clinics.html"
+                            class="btn btn-outline">
+
+                            View Clinic
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CLINIC 2 -->
+
+                <article class="clinic-card">
+
+                    <div class="clinic-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3"
+                            alt="Clinic">
+
+                    </div>
+
+
+                    <div class="clinic-info">
+
+                        <h3>
+                            City Medical Center
+                        </h3>
+
+                        <p>
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            Mehsana, Gujarat
+
+                        </p>
+
+                        <p>
+
+                            <i class="fa-solid fa-user-doctor"></i>
+
+                            Multiple Doctors Available
+
+                        </p>
+
+
+                        <a href="pages/clinics.html"
+                            class="btn btn-outline">
+
+                            View Clinic
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FINAL CTA
+    ========================== -->
+
+    <section class="final-cta">
+
+        <div class="container">
+
+            <div class="cta-content">
+
+                <span class="section-label light-label">
+                    HEALTHCARE MADE SIMPLE
+                </span>
+
+
+                <h2>
+                    Ready to Find the Right Healthcare?
+                </h2>
+
+
+                <p>
+                    Search doctors, explore clinics,
+                    and manage your appointments
+                    from one convenient place.
+                </p>
+
+
+                <a href="pages/doctors.html"
+                    class="btn btn-white btn-large">
+
+                    Find a Doctor
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+
+            <!-- ABOUT -->
+
+            <div class="footer-about">
+
+                <a href="index.html"
+                    class="logo footer-logo">
+
+                    <span class="logo-icon">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                    </span>
+
+                    <span>WellPoint</span>
+
+                </a>
+
+
+                <p>
+                    Making healthcare appointments
+                    simpler and more accessible.
+                </p>
+
+            </div>
+
+
+            <!-- PLATFORM -->
+
+            <div class="footer-column">
+
+                <h4>Platform</h4>
+
+                <a href="pages/doctors.html">
+                    Find Doctors
+                </a>
+
+                <a href="pages/clinics.html">
+                    Clinics
+                </a>
+
+                <a href="#">
+                    Appointments
+                </a>
+
+            </div>
+
+
+            <!-- SUPPORT -->
+
+            <div class="footer-column">
+
+                <h4>Support</h4>
+
+                <a href="pages/about.html">
+                    About Us
+                </a>
+
+                <a href="pages/contact.html">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Help Center
+                </a>
+
+            </div>
+
+
+            <!-- CONTACT -->
+
+            <div class="footer-column">
+
+                <h4>Contact</h4>
+
+                <p>
+                    support@wellpoint.com
+                </p>
+
+                <p>
+                    +91 XXXXX XXXXX
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER BOTTOM -->
+
+        <div class="container footer-bottom">
+
+            <p>
+                © 2026 WellPoint. All rights reserved.
+            </p>
+
+
+            <div class="social-links">
+
+                <a href="#">
+
+                    <i class="fa-brands fa-facebook-f"></i>
+
+                </a>
+
+
+                <a href="#">
+
+                    <i class="fa-brands fa-instagram"></i>
+
+                </a>
+
+
+                <a href="#">
+
+                    <i class="fa-brands fa-linkedin-in"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- MAIN JAVASCRIPT -->
+
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

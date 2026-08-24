@@ -1,0 +1,971 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find Doctors | WellPoint</title>
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <!-- Doctors CSS -->
+
+    <link rel="stylesheet"
+          href="{% static 'css/doctors.css' %}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <!-- LOGO -->
+
+            <a href="/" class="logo">
+
+                <span class="logo-icon">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </span>
+
+                <span>WellPoint</span>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav-links">
+
+                <a href="/">
+                    Home
+                </a>
+
+                <a href="{% url 'doctor_list' %}"
+                   class="active">
+
+                    Find Doctors
+
+                </a>
+
+                <a href="#">
+                    Clinics
+                </a>
+
+                <a href="#">
+                    My Appointments
+                </a>
+
+            </nav>
+
+
+            <!-- USER ACTIONS -->
+
+            <div class="nav-actions">
+
+
+                <button class="notification-btn">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <button class="profile-btn">
+
+                    <div class="profile-avatar">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <span class="profile-name">
+
+                        My Account
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+
+                <!-- MOBILE MENU BUTTON -->
+
+                <button class="mobile-menu-btn"
+                        id="mobileMenuBtn">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         MOBILE MENU
+    ========================== -->
+
+    <div class="mobile-menu"
+         id="mobileMenu">
+
+
+        <a href="/">
+            Home
+        </a>
+
+
+        <a href="{% url 'doctor_list' %}"
+           class="active">
+
+            Find Doctors
+
+        </a>
+
+
+        <a href="#">
+            Clinics
+        </a>
+
+
+        <a href="#">
+            My Appointments
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         SEARCH HERO
+    ========================== -->
+
+    <section class="search-hero">
+
+
+        <div class="hero-container">
+
+
+            <div class="hero-text">
+
+
+                <span class="section-label">
+
+                    <span></span>
+
+                    FIND HEALTHCARE
+
+                </span>
+
+
+                <h1>
+
+                    Find the Right Doctor
+
+                    <span>
+                        for Your Health.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Search trusted doctors,
+                    explore specialties,
+                    and book appointments with ease.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- SEARCH BOX -->
+
+            <div class="search-box">
+
+
+                <div class="search-input">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text"
+                           id="searchInput"
+                           placeholder="Search doctor or specialization">
+
+                </div>
+
+
+                <div class="search-divider"></div>
+
+
+                <div class="location-input">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <input type="text"
+                           id="locationInput"
+                           placeholder="Enter location">
+
+                </div>
+
+
+                <button class="search-button"
+                        id="searchButton">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <span>
+                        Search
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="doctors-page">
+
+
+        <div class="doctors-container">
+
+
+            <!-- =========================
+                 FILTER SIDEBAR
+            ========================== -->
+
+            <aside class="filters">
+
+
+                <div class="filter-header">
+
+
+                    <div>
+
+                        <i class="fa-solid fa-sliders"></i>
+
+                        <h3>
+                            Filters
+                        </h3>
+
+                    </div>
+
+
+                    <button id="clearFilters">
+
+                        Clear All
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- SPECIALIZATION -->
+
+                <div class="filter-group">
+
+
+                    <h4>
+                        Specialization
+                    </h4>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="General Physician">
+
+                        <span class="custom-check"></span>
+
+                        General Physician
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="Cardiologist">
+
+                        <span class="custom-check"></span>
+
+                        Cardiologist
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="Dermatologist">
+
+                        <span class="custom-check"></span>
+
+                        Dermatologist
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="Dentist">
+
+                        <span class="custom-check"></span>
+
+                        Dentist
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="Pediatrician">
+
+                        <span class="custom-check"></span>
+
+                        Pediatrician
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="specialization-filter"
+                               value="Orthopedic">
+
+                        <span class="custom-check"></span>
+
+                        Orthopedic
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- EXPERIENCE -->
+
+                <div class="filter-group">
+
+
+                    <h4>
+                        Experience
+                    </h4>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="experience"
+                               value="all"
+                               checked>
+
+                        <span class="custom-radio"></span>
+
+                        Any Experience
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="experience"
+                               value="1-5">
+
+                        <span class="custom-radio"></span>
+
+                        1 – 5 Years
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="experience"
+                               value="5-10">
+
+                        <span class="custom-radio"></span>
+
+                        5 – 10 Years
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="experience"
+                               value="10+">
+
+                        <span class="custom-radio"></span>
+
+                        10+ Years
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- AVAILABILITY -->
+
+                <div class="filter-group">
+
+
+                    <h4>
+                        Availability
+                    </h4>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="availability-filter"
+                               value="today">
+
+                        <span class="custom-check"></span>
+
+                        Available Today
+
+                    </label>
+
+
+                    <label class="checkbox-option">
+
+                        <input type="checkbox"
+                               class="availability-filter"
+                               value="week">
+
+                        <span class="custom-check"></span>
+
+                        Available This Week
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- CONSULTATION FEE -->
+
+                <div class="filter-group">
+
+
+                    <h4>
+                        Consultation Fee
+                    </h4>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="fee"
+                               value="all"
+                               checked>
+
+                        <span class="custom-radio"></span>
+
+                        Any Fee
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="fee"
+                               value="500">
+
+                        <span class="custom-radio"></span>
+
+                        Under ₹500
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="fee"
+                               value="1000">
+
+                        <span class="custom-radio"></span>
+
+                        ₹500 – ₹1000
+
+                    </label>
+
+
+                    <label class="radio-option">
+
+                        <input type="radio"
+                               name="fee"
+                               value="above1000">
+
+                        <span class="custom-radio"></span>
+
+                        Above ₹1000
+
+                    </label>
+
+
+                </div>
+
+
+            </aside>
+
+
+
+            <!-- =========================
+                 DOCTORS SECTION
+            ========================== -->
+
+            <section class="doctors-section">
+
+
+                <!-- RESULTS HEADER -->
+
+                <div class="results-header">
+
+
+                    <div>
+
+
+                        <p class="results-label">
+
+                            AVAILABLE DOCTORS
+
+                        </p>
+
+
+                        <h2>
+
+                            <span id="doctorCount">
+
+                                {{ doctors|length }}
+
+                            </span>
+
+                            Doctors Found
+
+                        </h2>
+
+
+                    </div>
+
+
+
+                    <!-- SORT -->
+
+                    <select id="sortDoctors">
+
+
+                        <option value="default">
+
+                            Sort by: Recommended
+
+                        </option>
+
+
+                        <option value="experience">
+
+                            Experience
+
+                        </option>
+
+
+                        <option value="fee-low">
+
+                            Fee: Low to High
+
+                        </option>
+
+
+                        <option value="fee-high">
+
+                            Fee: High to Low
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                     DOCTORS LIST
+                ========================== -->
+
+                <div class="doctors-list"
+                     id="doctorsList">
+
+
+                    {% for doctor in doctors %}
+
+
+                    <article class="doctor-card"
+
+                             data-name="{{ doctor.doctor_name|lower }}"
+
+                             data-specialization="{{ doctor.specialization }}"
+
+                             data-location="{{ doctor.clinic|lower }}"
+
+                             data-experience="{{ doctor.experience }}"
+
+                             data-fee="{{ doctor.consultation_fee }}"
+
+                             data-availability="today week">
+
+
+                        <!-- DOCTOR IMAGE -->
+
+                        <div class="doctor-image">
+
+
+                            <!--
+                            Your current Doctor model does not
+                            contain a doctor image field.
+
+                            So we temporarily use the same
+                            professional placeholder image.
+                            -->
+
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d"
+
+                                 alt="{{ doctor.doctor_name }}">
+
+
+                        </div>
+
+
+
+                        <!-- DOCTOR INFORMATION -->
+
+                        <div class="doctor-info">
+
+
+                            <div class="doctor-top">
+
+
+                                <div>
+
+
+                                    <h3>
+
+                                        {{ doctor.doctor_name }}
+
+                                    </h3>
+
+
+                                    <p class="specialization">
+
+                                        {{ doctor.specialization }}
+
+                                    </p>
+
+
+                                </div>
+
+
+
+                                <!-- TEMPORARY AVAILABILITY -->
+
+                                <span class="available-badge">
+
+                                    <span></span>
+
+                                    Available Today
+
+                                </span>
+
+
+                            </div>
+
+
+
+                            <!-- RATING + EXPERIENCE -->
+
+                            <div class="doctor-details">
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-star"></i>
+
+                                    New
+
+                                </span>
+
+
+                                <span>
+
+                                    <i class="fa-solid fa-briefcase-medical"></i>
+
+                                    {{ doctor.experience }}
+                                    Years Experience
+
+                                </span>
+
+
+                            </div>
+
+
+
+                            <!-- CLINIC -->
+
+                            <p class="clinic">
+
+                                <i class="fa-solid fa-hospital"></i>
+
+                                {{ doctor.clinic }}
+
+                            </p>
+
+
+
+                            <!-- QUALIFICATION -->
+
+                            <p class="location">
+
+                                <i class="fa-solid fa-graduation-cap"></i>
+
+                                {{ doctor.qualification }}
+
+                            </p>
+
+
+
+                            <!-- BOTTOM SECTION -->
+
+                            <div class="doctor-bottom">
+
+
+                                <div class="fee">
+
+
+                                    <span>
+
+                                        Consultation Fee
+
+                                    </span>
+
+
+                                    <strong>
+
+                                        ₹{{ doctor.consultation_fee }}
+
+                                    </strong>
+
+
+                                </div>
+
+
+
+                                <!-- ACTION BUTTONS -->
+
+                                <div class="doctor-actions">
+
+
+                                    <a href="{% url 'doctor_detail' doctor.doctor_id %}"
+
+                                       class="view-profile">
+
+                                        View Profile
+
+                                    </a>
+
+
+                                    <!--
+                                    Appointment page is not connected yet.
+                                    So keep this button for now.
+                                    -->
+
+                                    <a href="#"
+
+                                       class="book-appointment">
+
+                                        Book Appointment
+
+                                        <i class="fa-solid fa-arrow-right"></i>
+
+                                    </a>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                    {% empty %}
+
+
+                    <!-- IF DATABASE HAS NO DOCTORS -->
+
+                    <div class="no-results"
+                         style="display: block;">
+
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+
+                        <h3>
+
+                            No Doctors Found
+
+                        </h3>
+
+
+                        <p>
+
+                            There are currently no doctors
+                            available in the database.
+
+                        </p>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+
+                <!-- =========================
+                     NO RESULTS FOR JAVASCRIPT
+                ========================== -->
+
+                <div class="no-results"
+                     id="noResults">
+
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+
+                    <h3>
+
+                        No Doctors Found
+
+                    </h3>
+
+
+                    <p>
+
+                        Try changing your search or filters.
+
+                    </p>
+
+
+                    <button id="resetSearch">
+
+                        Reset Search
+
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="{% static 'js/doctors.js' %}"></script>
+
+
+</body>
+
+</html>
