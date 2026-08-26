@@ -1,0 +1,719 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment | Well-Point</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Main CSS -->
+ <link rel="stylesheet" href="{% static 'css/appointments.css' %}">
+
+    <!-- Appointment CSS -->
+    <link rel="stylesheet" href="{% static 'css/appointment.css' %}">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a href="../index.html" class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-pulse"></i>
+            </div>
+
+            <span>Well-Point</span>
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="/doctors/">
+                Find Doctors
+            </a>
+
+            <a href="#">
+                About
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-right">
+
+            <button class="notification-btn" aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i>
+            </button>
+
+
+            <a href="login.html" class="account-btn">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>My Account</span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="appointment-page">
+
+        <div class="appointment-container">
+
+
+            <!-- Back Button -->
+
+            <a href="doctor-detail.html" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Doctor Profile
+
+            </a>
+
+
+            <!-- Page Heading -->
+
+            <div class="appointment-heading">
+
+                <div class="section-label">
+
+                    <span class="label-dot"></span>
+
+                    APPOINTMENT BOOKING
+
+                </div>
+
+
+                <h1>
+
+                    Book Your
+
+                    <span>Appointment</span>
+
+                </h1>
+
+
+                <p>
+
+                    Choose your preferred date and time, then provide
+                    your details to confirm your appointment.
+
+                </p>
+
+            </div>
+
+
+            <!-- ================= APPOINTMENT GRID ================= -->
+
+            <div class="appointment-grid">
+
+
+                <!-- LEFT SIDE -->
+
+                <div class="booking-left">
+
+
+                    <!-- ================= SELECTED DOCTOR ================= -->
+
+                    <section class="booking-card doctor-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-icon">
+
+                                <i class="fa-solid fa-user-doctor"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2>Your Doctor</h2>
+
+                                <p>You are booking an appointment with</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="selected-doctor">
+
+                            <img
+                                id="doctorImage"
+                                src="https://randomuser.me/api/portraits/men/32.jpg"
+                                alt="Doctor">
+
+
+                            <div class="doctor-info">
+
+                                <h3 id="doctorName">
+                                    Dr. Rahul Sharma
+                                </h3>
+
+                                <p id="doctorSpecialization">
+                                    Cardiologist
+                                </p>
+
+
+                                <div class="doctor-meta">
+
+                                    <span>
+
+                                        <i class="fa-solid fa-hospital"></i>
+
+                                        <span id="doctorClinic">
+                                            Well-Point Heart Clinic
+                                        </span>
+
+                                    </span>
+
+
+                                    <span>
+
+                                        <i class="fa-solid fa-location-dot"></i>
+
+                                        <span id="doctorLocation">
+                                            Mehsana, Gujarat
+                                        </span>
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="doctor-rating">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                <strong id="doctorRating">
+                                    4.8
+                                </strong>
+
+                                <span>
+                                    (124 Reviews)
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ================= SELECT DATE ================= -->
+
+                    <section class="booking-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-icon">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2>Select Date</h2>
+
+                                <p>Choose a convenient appointment date</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="date-options">
+
+                            <button class="date-btn active"
+                                data-date="Today">
+
+                                <span class="day-name">
+                                    TODAY
+                                </span>
+
+                                <strong id="todayDate">
+                                    26
+                                </strong>
+
+                            </button>
+
+
+                            <button class="date-btn"
+                                data-date="Tomorrow">
+
+                                <span class="day-name">
+                                    TOMORROW
+                                </span>
+
+                                <strong id="tomorrowDate">
+                                    27
+                                </strong>
+
+                            </button>
+
+
+                            <button class="date-btn"
+                                data-date="Wednesday">
+
+                                <span class="day-name">
+                                    WED
+                                </span>
+
+                                <strong id="day3Date">
+                                    28
+                                </strong>
+
+                            </button>
+
+
+                            <button class="date-btn"
+                                data-date="Thursday">
+
+                                <span class="day-name">
+                                    THU
+                                </span>
+
+                                <strong id="day4Date">
+                                    29
+                                </strong>
+
+                            </button>
+
+
+                            <button class="date-btn"
+                                data-date="Friday">
+
+                                <span class="day-name">
+                                    FRI
+                                </span>
+
+                                <strong id="day5Date">
+                                    30
+                                </strong>
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ================= SELECT TIME ================= -->
+
+                    <section class="booking-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-icon">
+
+                                <i class="fa-regular fa-clock"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2>Select Time</h2>
+
+                                <p>Available appointment slots</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="time-section">
+
+                            <h4>Morning</h4>
+
+
+                            <div class="time-options">
+
+                                <button class="time-btn active">
+                                    09:00 AM
+                                </button>
+
+                                <button class="time-btn">
+                                    10:00 AM
+                                </button>
+
+                                <button class="time-btn">
+                                    11:00 AM
+                                </button>
+
+                                <button class="time-btn">
+                                    11:30 AM
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="time-section">
+
+                            <h4>Afternoon</h4>
+
+
+                            <div class="time-options">
+
+                                <button class="time-btn">
+                                    02:00 PM
+                                </button>
+
+                                <button class="time-btn">
+                                    03:00 PM
+                                </button>
+
+                                <button class="time-btn">
+                                    04:00 PM
+                                </button>
+
+                                <button class="time-btn">
+                                    05:00 PM
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- ================= PATIENT DETAILS ================= -->
+
+                    <section class="booking-card patient-details-card">
+
+                        <div class="card-heading">
+
+                            <div class="heading-icon">
+
+                                <i class="fa-regular fa-user"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2>Your Details</h2>
+
+                                <p>Please provide your information</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="patientName">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="patientName"
+                                    placeholder="Enter your full name">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="patientPhone">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="patientPhone"
+                                    placeholder="Enter your phone number">
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="patientEmail">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="patientEmail"
+                                    placeholder="Enter your email">
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label for="reason">
+                                    Reason for Appointment
+                                </label>
+
+                                <textarea
+                                    id="reason"
+                                    rows="4"
+                                    placeholder="Briefly describe your health concern"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </div>
+
+
+                <!-- ================= RIGHT SIDE ================= -->
+
+                <aside class="booking-summary">
+
+
+                    <div class="summary-label">
+
+                        APPOINTMENT SUMMARY
+
+                    </div>
+
+
+                    <h2>
+                        Review Your Booking
+                    </h2>
+
+
+                    <!-- Doctor Summary -->
+
+                    <div class="summary-doctor">
+
+                        <img
+                            id="summaryDoctorImage"
+                            src="https://randomuser.me/api/portraits/men/32.jpg"
+                            alt="Doctor">
+
+
+                        <div>
+
+                            <h3 id="summaryDoctorName">
+                                Dr. Rahul Sharma
+                            </h3>
+
+                            <p id="summarySpecialization">
+                                Cardiologist
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <!-- Date -->
+
+                    <div class="summary-item">
+
+                        <div class="summary-icon">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Appointment Date
+                            </span>
+
+                            <strong id="summaryDate">
+                                Today
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Time -->
+
+                    <div class="summary-item">
+
+                        <div class="summary-icon">
+
+                            <i class="fa-regular fa-clock"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Appointment Time
+                            </span>
+
+                            <strong id="summaryTime">
+                                09:00 AM
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+
+                    <div class="summary-item">
+
+                        <div class="summary-icon">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Clinic Location
+                            </span>
+
+                            <strong id="summaryLocation">
+                                Mehsana, Gujarat
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <!-- Fee -->
+
+                    <div class="fee-row">
+
+                        <span>
+                            Consultation Fee
+                        </span>
+
+                        <strong id="consultationFee">
+                            ₹500
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <!-- Confirm Button -->
+
+                    <button
+                        type="button"
+                        id="confirmAppointment"
+                        class="confirm-btn">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                        Confirm Appointment
+
+                    </button>
+
+
+                    <p class="summary-note">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        Your appointment will be confirmed after submission.
+
+                    </p>
+
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= SUCCESS MODAL ================= -->
+
+    <div class="modal-overlay" id="successModal">
+
+        <div class="success-modal">
+
+            <div class="success-icon">
+
+                <i class="fa-solid fa-check"></i>
+
+            </div>
+
+
+            <h2>
+                Appointment Requested!
+            </h2>
+
+
+            <p id="successMessage">
+
+                Your appointment request has been submitted successfully.
+
+            </p>
+
+
+            <button id="closeModal">
+
+                Done
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+<script src="{% static 'js/appointment.js' %}"></script>
+
+</body>
+
+</html>

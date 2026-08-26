@@ -1,0 +1,1060 @@
+/* ================================
+   APPOINTMENT PAGE
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8fc;
+    color: #243044;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    width: 100%;
+    height: 92px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e4e9f0;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    text-decoration: none;
+
+    color: #263449;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #315eb6;
+
+    color: white;
+
+    font-size: 22px;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+
+    color: #5f6b7a;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    transition: 0.2s;
+}
+
+
+.nav-links a:hover {
+    color: #315eb6;
+}
+
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+
+.notification-btn {
+    border: none;
+    background: transparent;
+
+    font-size: 21px;
+
+    color: #263449;
+
+    cursor: pointer;
+}
+
+
+.account-btn {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    text-decoration: none;
+
+    color: #263449;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+.account-btn i {
+    font-size: 21px;
+}
+
+
+/* ================================
+   MAIN PAGE
+================================ */
+
+.appointment-page {
+    padding: 60px 30px 100px;
+}
+
+
+.appointment-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    text-decoration: none;
+
+    color: #64748b;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    margin-bottom: 38px;
+
+    transition: 0.2s;
+}
+
+
+.back-btn:hover {
+    color: #315eb6;
+}
+
+
+/* ================================
+   PAGE HEADING
+================================ */
+
+.appointment-heading {
+    margin-bottom: 40px;
+}
+
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #315eb6;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 18px;
+}
+
+
+.label-dot {
+    width: 9px;
+    height: 9px;
+
+    background: #22b8a7;
+
+    border-radius: 50%;
+}
+
+
+.appointment-heading h1 {
+    margin: 0;
+
+    font-size: 42px;
+
+    color: #243044;
+}
+
+
+.appointment-heading h1 span {
+    color: #315eb6;
+}
+
+
+.appointment-heading p {
+    margin-top: 14px;
+
+    color: #6b7788;
+
+    font-size: 17px;
+}
+
+
+/* ================================
+   MAIN GRID
+================================ */
+
+.appointment-grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 380px;
+
+    gap: 35px;
+
+    align-items: start;
+}
+
+
+.booking-left {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+
+/* ================================
+   BOOKING CARDS
+================================ */
+
+.booking-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 20px;
+
+    padding: 32px;
+
+    box-shadow: 0 10px 35px rgba(20, 40, 80, 0.04);
+}
+
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 28px;
+}
+
+
+.heading-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f0ff;
+
+    color: #315eb6;
+
+    border-radius: 15px;
+
+    font-size: 21px;
+}
+
+
+.card-heading h2 {
+    margin: 0 0 5px;
+
+    font-size: 23px;
+
+    color: #263449;
+}
+
+
+.card-heading p {
+    margin: 0;
+
+    color: #738093;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   SELECTED DOCTOR
+================================ */
+
+.selected-doctor {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.selected-doctor img {
+    width: 100px;
+    height: 100px;
+
+    border-radius: 16px;
+
+    object-fit: cover;
+}
+
+
+.doctor-info {
+    flex: 1;
+}
+
+
+.doctor-info h3 {
+    margin: 0 0 8px;
+
+    font-size: 21px;
+
+    color: #263449;
+}
+
+
+.doctor-info > p {
+    margin: 0 0 18px;
+
+    color: #315eb6;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.doctor-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    color: #687587;
+
+    font-size: 14px;
+}
+
+
+.doctor-meta span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+.doctor-meta i {
+    color: #315eb6;
+}
+
+
+.doctor-rating {
+    text-align: right;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.doctor-rating i {
+    color: #f6a800;
+
+    font-size: 22px;
+}
+
+
+.doctor-rating strong {
+    font-size: 20px;
+}
+
+
+.doctor-rating span {
+    font-size: 12px;
+
+    color: #748094;
+}
+
+
+/* ================================
+   DATE BUTTONS
+================================ */
+
+.date-options {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+}
+
+
+.date-btn {
+    min-height: 90px;
+
+    border: 1px solid #dce3ec;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    transition: 0.2s;
+}
+
+
+.date-btn:hover {
+    border-color: #315eb6;
+
+    transform: translateY(-2px);
+}
+
+
+.date-btn.active {
+    background: #edf3ff;
+
+    border-color: #315eb6;
+
+    box-shadow: 0 5px 15px rgba(49, 94, 182, 0.12);
+}
+
+
+.day-name {
+    font-size: 11px;
+
+    color: #718096;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+.date-btn strong {
+    font-size: 22px;
+
+    color: #263449;
+}
+
+
+/* ================================
+   TIME
+================================ */
+
+.time-section {
+    margin-bottom: 28px;
+}
+
+
+.time-section:last-child {
+    margin-bottom: 0;
+}
+
+
+.time-section h4 {
+    margin-bottom: 15px;
+
+    color: #526174;
+
+    font-size: 15px;
+}
+
+
+.time-options {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 12px;
+}
+
+
+.time-btn {
+    padding: 14px 10px;
+
+    background: white;
+
+    border: 1px solid #dce3ec;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: #536174;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+
+.time-btn:hover {
+    border-color: #315eb6;
+
+    color: #315eb6;
+}
+
+
+.time-btn.active {
+    background: #315eb6;
+
+    color: white;
+
+    border-color: #315eb6;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 22px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-group label {
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #46556a;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #dce3ec;
+
+    border-radius: 10px;
+
+    padding: 14px 15px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+    font-family: inherit;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #315eb6;
+
+    box-shadow: 0 0 0 3px rgba(49, 94, 182, 0.08);
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* ================================
+   SUMMARY
+================================ */
+
+.booking-summary {
+    position: sticky;
+    top: 115px;
+
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 35px rgba(20, 40, 80, 0.06);
+}
+
+
+.summary-label {
+    color: #315eb6;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 14px;
+}
+
+
+.booking-summary h2 {
+    margin: 0 0 28px;
+
+    font-size: 24px;
+
+    color: #263449;
+}
+
+
+.summary-doctor {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.summary-doctor img {
+    width: 64px;
+    height: 64px;
+
+    object-fit: cover;
+
+    border-radius: 13px;
+}
+
+
+.summary-doctor h3 {
+    margin: 0 0 6px;
+
+    font-size: 16px;
+
+    color: #263449;
+}
+
+
+.summary-doctor p {
+    margin: 0;
+
+    color: #315eb6;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.summary-divider {
+    height: 1px;
+
+    background: #e5eaf0;
+
+    margin: 24px 0;
+}
+
+
+.summary-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.summary-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.summary-icon {
+    min-width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf3ff;
+
+    border-radius: 13px;
+
+    color: #315eb6;
+
+    font-size: 18px;
+}
+
+
+.summary-item div:last-child {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.summary-item span {
+    color: #788496;
+
+    font-size: 13px;
+}
+
+
+.summary-item strong {
+    color: #344054;
+
+    font-size: 15px;
+}
+
+
+.fee-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 15px;
+
+    color: #687587;
+}
+
+
+.fee-row strong {
+    color: #263449;
+
+    font-size: 18px;
+}
+
+
+/* ================================
+   CONFIRM BUTTON
+================================ */
+
+.confirm-btn {
+    width: 100%;
+
+    border: none;
+
+    background: #315eb6;
+
+    color: white;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.confirm-btn:hover {
+    background: #264b96;
+
+    transform: translateY(-2px);
+}
+
+
+.summary-note {
+    text-align: center;
+
+    color: #8490a2;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-top: 17px;
+}
+
+
+.summary-note i {
+    color: #315eb6;
+
+    margin-right: 4px;
+}
+
+
+/* ================================
+   SUCCESS MODAL
+================================ */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(20, 30, 50, 0.45);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+}
+
+
+.modal-overlay.show {
+    display: flex;
+}
+
+
+.success-modal {
+    width: 100%;
+    max-width: 430px;
+
+    background: white;
+
+    padding: 45px 35px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    animation: modalAnimation 0.25s ease;
+}
+
+
+@keyframes modalAnimation {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.success-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e8f8f4;
+
+    color: #20aa92;
+
+    font-size: 32px;
+}
+
+
+.success-modal h2 {
+    margin-bottom: 12px;
+
+    color: #263449;
+}
+
+
+.success-modal p {
+    color: #718096;
+
+    line-height: 1.6;
+
+    margin-bottom: 28px;
+}
+
+
+.success-modal button {
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background: #315eb6;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 1050px) {
+
+    .appointment-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .booking-summary {
+        position: static;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+
+    .nav-links {
+        display: none;
+    }
+
+
+    .appointment-page {
+        padding: 40px 20px 80px;
+    }
+
+
+    .date-options {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .logo {
+        font-size: 22px;
+    }
+
+
+    .logo-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    .account-btn span {
+        display: none;
+    }
+
+
+    .booking-card {
+        padding: 22px;
+    }
+
+
+    .appointment-heading h1 {
+        font-size: 34px;
+    }
+
+
+    .selected-doctor {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .doctor-rating {
+        text-align: left;
+    }
+
+
+    .date-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .time-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .full-width {
+        grid-column: auto;
+    }
+
+}
