@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Reschedule Appointment | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Reschedule Appointment</h2>
+        <p>Dr. {{ doctor.doctor_name }} | {{ appointment.appointment_date }}</p>
+    </div>
+
+    <form method="post" id="rescheduleForm">
+        {% csrf_token %}
+        <div class="doctor-profile-card" style="padding:30px;">
+            <div class="doctor-profile-top">
+                <div>
+                    <p class="profile-label">SELECT NEW TIME</p>
+                    <h1>Choose a New Slot</h1>
+                </div>
+            </div>
+        </div>
+
+        {% if available_slots %}
+        {% for date_str, slot_data in available_slots.items %}
+        <div class="content-card" style="margin-top:20px;">
+            <strong>{{ slot_data.date|date:"D, M d, Y" }}</strong>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;">
+                {% for slot in slot_data.slots %}
+                <label class="time-slot-label">
+                    <input type="radio" name="appointment_time" value="{{ slot }}" onchange="setRescheduleSlot('{{ date_str }}', '{{ slot }}')" required>
+                    {{ slot }}
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <input type="hidden" name="appointment_date" id="selectedDateInput" value="">
+        <input type="hidden" name="appointment_time_hidden" id="selectedTimeInput" value="">
+        <button type="submit" class="book-now-btn" style="margin-top:20px;">Save New Appointment Time</button>
+        {% else %}
+        <p style="color:#64748b;">No available slots found.</p>
+        {% endif %}
+    </form>
+</div>
+
+<style>
+.time-slot-label {
+    display: block; padding: 10px; background: white;
+    border: 1px solid #e2e8f0; border-radius: 8px;
+    text-align: center; cursor: pointer; transition: 0.3s;
+}
+.time-slot-label input[type="radio"] { display: none; }
+.time-slot-label:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+</style>
+
+<script>
+function setRescheduleSlot(dateStr, timeStr) {
+    document.getElementById('selectedDateInput').value = dateStr;
+    document.getElementById('selectedTimeInput').value = timeStr;
+}
+document.getElementById('rescheduleForm').addEventListener('submit', function(e) {
+    if (!document.getElementById('selectedDateInput').value) {
+        e.preventDefault();
+        alert('Please select a date and time slot.');
+    }
+});
+</script>
+{% endblock %}

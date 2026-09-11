@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WellPoint | Healthcare Made Simple{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if messages %}
+    <div class="announcement-bar" id="msgBox">
+        <div class="container">
+            {% for message in messages %}
+                <i class="fa-solid fa-info"></i> {{ message }}
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        setTimeout(function(){ document.getElementById('msgBox').style.display='none'; }, 5000);
+    </script>
+    {% endif %}
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'home' %}" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-plus"></i></span>
+                <span>WellPoint</span>
+            </a>
+            <nav class="nav-links">
+                <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="{% url 'doctor_list' %}" class="{% if 'doctors' in request.path %}active{% endif %}">Find Doctors</a>
+                {% if current_user %}
+                {% if current_user.role.role_name == 'Patient' %}
+                <a href="{% url 'patient_dashboard' %}" class="{% if 'patient' in request.path %}active{% endif %}">Dashboard</a>
+                {% elif current_user.role.role_name == 'Doctor' %}
+                <a href="{% url 'doctor_dashboard' %}" class="{% if 'doctor' in request.path %}active{% endif %}">Dashboard</a>
+                {% elif current_user.role.role_name == 'Clinic' %}
+                <a href="{% url 'clinic_dashboard' %}" class="{% if 'clinic' in request.path %}active{% endif %}">Dashboard</a>
+                {% elif current_user.role.role_name == 'Clinic Staff' %}
+                <a href="{% url 'staff_dashboard' %}" class="{% if 'staff' in request.path %}active{% endif %}">Dashboard</a>
+                {% elif current_user.role.role_name == 'Admin' %}
+                <a href="{% url 'admin_dashboard' %}" class="{% if 'admin' in request.path %}active{% endif %}">Dashboard</a>
+                {% endif %}
+                {% endif %}
+            </nav>
+            <div class="nav-actions">
+                {% if current_user %}
+                <span class="profile-name">{{ current_user.full_name }}</span>
+                <a href="{% url 'logout' %}" class="login-btn">Logout</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="login-btn">Log In</a>
+                <a href="{% url 'register' %}" class="btn btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+                {% endif %}
+                <button class="mobile-menu-btn" id="mobileMenuBtn" type="button"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 WellPoint. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

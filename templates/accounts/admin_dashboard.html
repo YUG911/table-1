@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Admin Dashboard | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Admin Dashboard</h2>
+        <p>System Administration</p>
+    </div>
+
+    <div class="features-grid" style="grid-template-columns: repeat(5,1fr);margin-bottom:30px;">
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-desktop"></i></div>
+            <h3>{{ total_users }}</h3>
+            <p>Total Users</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-check-circle"></i></div>
+            <h3>{{ verified_users }}</h3>
+            <p>Verified</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-user-doctor"></i></div>
+            <h3>{{ total_patients }}</h3>
+            <p>Patients</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-stethoscope"></i></div>
+            <h3>{{ total_doctors }}</h3>
+            <p>Doctors</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-hospital"></i></div>
+            <h3>{{ total_clinics }}</h3>
+            <p>Clinics</p>
+        </div>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <h3>Pending Verification ({{ pending_verification }})</h3>
+        {% if unverified_users %}
+        <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:12px;text-align:left;">Name</th>
+                    <th style="padding:12px;text-align:left;">Email</th>
+                    <th style="padding:12px;text-align:left;">Role</th>
+                    <th style="padding:12px;text-align:left;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in unverified_users %}
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:12px;">{{ u.full_name }}</td>
+                    <td style="padding:12px;">{{ u.email }}</td>
+                    <td style="padding:12px;">{{ u.role.role_name }}</td>
+                    <td style="padding:12px;">
+                        <form method="post" action="{% url 'verify_user' %}" style="display:flex;gap:10px;">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ u.user_id }}">
+                            <input type="hidden" name="action" value="approve">
+                            <button type="submit" class="view-profile" style="background:#dcfce7;color:#16a34a;">Approve</button>
+                            <input type="hidden" name="user_id" value="{{ u.user_id }}">
+                            <input type="hidden" name="action" value="reject">
+                            <button type="submit" class="view-profile" style="background:#fee2e2;color:#991b2b;">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="color:#64748b;">No pending verifications.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

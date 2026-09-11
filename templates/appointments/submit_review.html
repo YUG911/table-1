@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Write Review | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Write a Review</h2>
+        <p>For your appointment with Dr. {{ doctor.doctor_name }} on {{ appointment.appointment_date }}</p>
+    </div>
+
+    <form method="post" class="doctor-profile-card" style="padding:30px;">
+        {% csrf_token %}
+        <div class="doctor-profile-top">
+            <div style="display:flex;gap:10px;flex-direction:column;">
+                <strong>Rating</strong>
+                <div style="display:flex;gap:5px;">
+                    {% for i in "12345" %}
+                    <input type="radio" name="rating" value="{{ i }}" id="star{{ i }}" required>
+                    <label for="star{{ i }}" style="font-size:24px;color:#f59e0b;cursor:pointer;">&#9733;</label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+            <label for="review_text"><strong>Review (optional)</strong></label>
+            <textarea name="review_text" id="review_text" class="form-control" rows="4" placeholder="Share your experience..."></textarea>
+        </div>
+
+        <button type="submit" class="book-now-btn" style="margin-top:20px;">Submit Review</button>
+    </form>
+</div>
+
+<script>
+const stars = document.querySelectorAll('input[name="rating"]');
+stars.forEach(function(star) {
+    star.addEventListener('change', function() {
+        const rating = this.value;
+    });
+});
+</script>
+{% endblock %}

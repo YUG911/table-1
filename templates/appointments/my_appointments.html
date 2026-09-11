@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Appointments | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>My Appointments</h2>
+        <p>{{ patient.user.full_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        {% if appointments %}
+        <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:12px;text-align:left;">Doctor</th>
+                    <th style="padding:12px;text-align:left;">Clinic</th>
+                    <th style="padding:12px;text-align:left;">Date</th>
+                    <th style="padding:12px;text-align:left;">Time</th>
+                    <th style="padding:12px;text-align:left;">Status</th>
+                    <th style="padding:12px;text-align:left;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in appointments %}
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:12px;">Dr. {{ appt.doctor.doctor_name }}</td>
+                    <td style="padding:12px;">{{ appt.clinic.clinic_name }}</td>
+                    <td style="padding:12px;">{{ appt.appointment_date }}</td>
+                    <td style="padding:12px;">{{ appt.appointment_time|time:"H:i" }}</td>
+                    <td style="padding:12px;">{{ appt.status }}</td>
+                    <td style="padding:12px;">
+                        {% if appt.status == 'Pending' or appt.status == 'Confirmed' %}
+                        <a href="{% url 'reschedule_appointment' appt.appointment_id %}" class="view-profile" style="margin-right:8px;">Reschedule</a>
+                        {% endif %}
+                        {% if appt.status == 'Completed' %}
+                        {% if appt.review %}
+                        <span style="color:#22c55e;">Reviewed</span>
+                        {% else %}
+                        <a href="{% url 'submit_review' appt.appointment_id %}" class="view-profile" style="margin-left:8px;">Write Review</a>
+                        {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-results" style="display:block;text-align:center;padding:80px;">
+            <i class="fa-solid fa-calendar-times" style="font-size:45px;color:#cbd5e1;"></i>
+            <h3>No Appointments</h3>
+            <p>You haven't booked any appointments yet.</p>
+            <a href="{% url 'doctor_list' %}" class="btn btn-primary">Find a Doctor</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

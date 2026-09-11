@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Upload Prescription | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Upload Prescription</h2>
+        <p>Appointment: #{{ appointment.appointment_id }} | Patient: {{ appointment.patient.user.full_name }}</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="doctor-profile-card" style="padding:30px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="file">Prescription File</label>
+            <input type="file" name="file" class="form-control" required>
+        </div>
+        <button type="submit" class="book-now-btn">Upload Prescription</button>
+    </form>
+</div>
+{% endblock %}

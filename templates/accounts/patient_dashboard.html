@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Patient Dashboard</h2>
+        <p>Welcome back, {{ patient.user.full_name }}!</p>
+    </div>
+    <div class="features-grid" style="grid-template-columns: repeat(3,1fr);">
+        <a href="{% url 'doctor_list' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>Find Doctors</h3>
+        </a>
+        <a href="{% url 'my_appointments' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3>My Appointments</h3>
+        </a>
+        <a href="{% url 'my_records' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-folder-medical"></i></div>
+            <h3>Medical Records</h3>
+        </a>
+        <a href="{% url 'my_prescriptions' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-file-prescription"></i></div>
+            <h3>Prescriptions</h3>
+        </a>
+        <a href="{% url 'my_reports' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-file-medical"></i></div>
+            <h3>Reports</h3>
+        </a>
+        <a href="{% url 'profile' %}" class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-user"></i></div>
+            <h3>My Profile</h3>
+        </a>
+    </div>
+
+    {% if pending_appointments %}
+    <div class="section" style="padding:40px 0;">
+        <h3>Upcoming Appointments</h3>
+        <div class="doctors-list">
+            {% for appt in pending_appointments %}
+            <article class="doctor-card" style="padding:20px;">
+                <div class="doctor-info">
+                    <h3>{{ appt.doctor.doctor_name }}</h3>
+                    <p>{{ appt.appointment_date }} at {{ appt.appointment_time }}</p>
+                    <p><strong>Status:</strong> {{ appt.status }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if completed_appointments %}
+    <div class="section" style="padding:40px 0;">
+        <h3>Past Appointments</h3>
+        <div class="doctors-list">
+            {% for appt in completed_appointments %}
+            <article class="doctor-card" style="padding:20px;">
+                <div class="doctor-info">
+                    <h3>{{ appt.doctor.doctor_name }}</h3>
+                    <p>{{ appt.appointment_date }} at {{ appt.appointment_time }}</p>
+                    <span class="available-badge">Completed</span>
+                    {% if appt.appointment_status == 'Completed' and appt.status == 'Completed' %}
+                    {% if not appt.review %}
+                    <a href="{% url 'submit_review' appt.appointment_id %}" class="book-appointment" style="margin-top:10px;">Write Review</a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

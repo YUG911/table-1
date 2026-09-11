@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/form-pages.css' %}">{{ form.media }}{% endblock %}
+{% block title %}Staff Registration | WellPoint{% endblock %}
+{% block content %}
+
+<div class="register-page">
+    <section class="register-section">
+        <div class="register-container">
+            <div class="top-section">
+                <a href="{% url 'home' %}" class="logo"><span class="logo-icon"><i class="fa-solid fa-plus"></i></span><span>WellPoint</span></a>
+                <span class="register-label">Step 2 of 2 - Staff Details</span>
+            </div>
+            <div class="register-content">
+                <h1>Clinic Staff Profile</h1>
+                <p>Assign this staff member to a clinic.</p>
+                <form method="post">{% csrf_token %}
+                    {% if form %}{% endif %}
+
+                    <div class="form-group">
+                        <label for="clinic">Select Clinic</label>
+                        <select name="clinic" id="clinic" class="form-control" style="padding:12px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+                            <option value="">-- Select Clinic --</option>
+                            {% for clinic in clinics %}
+                            <option value="{{ clinic.clinic_id }}">{{ clinic.clinic_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="create-account-button"><span>Complete Registration</span><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="visual-section">
+        <div class="shape shape-one"></div>
+        <div class="shape shape-two"></div>
+        <div class="visual-content">
+            <div class="patient-visual"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d" alt="Staff"></div>
+        </div>
+    </section>
+</div>
+{% endblock %}

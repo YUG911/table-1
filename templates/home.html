@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}WellPoint | Healthcare Made Simple{% endblock %}
+{% block content %}
+
+<section class="hero">
+    <div class="container hero-container">
+        <div class="hero-content">
+            <div class="hero-label"><span></span> HEALTHCARE MADE SIMPLE</div>
+            <h1>Find the Right Doctor. <span>Book with Confidence.</span></h1>
+            <p class="hero-description">Search doctors, explore clinics, check availability, and book your appointment — all in one place.</p>
+            <div class="hero-buttons">
+                <a href="{% url 'doctor_list' %}" class="btn btn-primary btn-large"><i class="fa-solid fa-magnifying-glass"></i> Find a Doctor <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#clinics" class="btn btn-outline btn-large">Explore Clinics</a>
+            </div>
+            <div class="trust-items">
+                <div><i class="fa-solid fa-circle-check"></i> Easy Booking</div>
+                <div><i class="fa-solid fa-circle-check"></i> Find Doctors</div>
+                <div><i class="fa-solid fa-circle-check"></i> Save Time</div>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <div class="hero-image-bg"></div>
+            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2" alt="Doctor">
+            <div class="appointment-card">
+                <div class="appointment-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <div><h4>Easy Appointment</h4><p>Find → Select → Book</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="search-section">
+    <div class="container">
+        <form class="search-box" method="get" action="{% url 'doctor_list' %}">
+            <div class="search-field">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div>
+                    <label for="search">Search Doctor</label>
+                    <input type="text" id="search" name="search" placeholder="Doctor name or specialization">
+                </div>
+            </div>
+            <div class="search-field">
+                <i class="fa-solid fa-stethoscope"></i>
+                <div>
+                    <label for="specialization">Specialization</label>
+                    <select id="specialization" name="specialization">
+                        <option value="">Select specialization</option>
+                        {% for s in specializations %}<option value="{{ s.specialization_name }}">{{ s.specialization_name }}</option>{% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="search-field">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City or location">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary search-btn">Search Doctors <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+    </div>
+</section>
+
+<section class="section why-section">
+    <div class="container">
+        <div class="section-heading center">
+            <span class="section-label"><span></span> WHY WELLPOINT</span>
+            <h2>Healthcare appointments made easier for you.</h2>
+            <p>Everything you need to find the right healthcare provider.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-user-doctor"></i></div><h3>Find Doctors</h3><p>Find the right healthcare specialist for your needs.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div><h3>Easy Booking</h3><p>Choose an available time that fits your schedule.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fa-solid fa-hospital"></i></div><h3>Explore Clinics</h3><p>Discover clinics and healthcare services easily.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="section doctors-section" id="doctors">
+    <div class="container">
+        <div class="section-top">
+            <div>
+                <span class="section-label"><span></span> FEATURED DOCTORS</span>
+                <h2>Meet our healthcare professionals</h2>
+                <p>Explore doctors and find the right specialist for your needs.</p>
+            </div>
+            <a href="{% url 'doctor_list' %}" class="text-link">View All Doctors <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="doctors-grid" id="featuredDoctors">
+            {% for doctor in doctors %}
+            <article class="doctor-card">
+                <div class="doctor-image">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d" alt="{{ doctor.doctor_name }}">
+                </div>
+                <div class="doctor-info">
+                    <h3>{{ doctor.doctor_name }}</h3>
+                    <span>{{ doctor.doctor_specialization.first.specialization.specialization_name|default:'General Physician' }}</span>
+                    <div class="doctor-rating">
+                        <span><i class="fa-solid fa-star"></i> {{ doctor.avg_rating|default:'New' }}</span>
+                    </div>
+                    <div class="doctor-details">
+                        <span><i class="fa-solid fa-briefcase-medical"></i> {{ doctor.experience|default:'0' }} Years Experience</span>
+                        {% if doctor.doctor_clinic.first %}
+                        <span><i class="fa-solid fa-hospital"></i> {{ doctor.doctor_clinic.first.clinic.clinic_name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="doctor-bottom">
+                        <div class="fee"><span>Consultation Fee</span><strong>&#8377;{{ doctor.new_patient_fee }}</strong></div>
+                        <div class="doctor-actions">
+                            <a href="{% url 'doctor_detail' doctor.doctor_id %}" class="view-profile">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="no-results" style="display:block;text-align:center;padding:80px;">
+                <i class="fa-solid fa-user-doctor" style="font-size:45px;color:#cbd5e1;"></i>
+                <h3>No Doctors Found</h3>
+                <p>There are currently no doctors available in the database.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

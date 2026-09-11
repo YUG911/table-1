@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{{ form.media }}{% endblock %}
+{% block title %}Doctor Dashboard | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Doctor Dashboard</h2>
+        <p>Welcome, Dr. {{ doctor.doctor_name }}!</p>
+    </div>
+
+    <div class="features-grid" style="grid-template-columns: repeat(4,1fr);margin-bottom:30px;">
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3>{{ total_appointments }}</h3>
+            <p>Total Appointments</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-check-circle"></i></div>
+            <h3>{{ completed_count }}</h3>
+            <p>Completed</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-star"></i></div>
+            <h3>{{ avg_rating }}</h3>
+            <p>Average Rating</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-users"></i></div>
+            <h3>{{ completed_count }}</h3>
+            <p>Patients</p>
+        </div>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <div class="section-top">
+            <div><h3>Today's Appointments</h3></div>
+            <a href="{% url 'doctor_appointments' %}" class="text-link">View All <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        {% if todays_appointments %}
+        <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:12px;text-align:left;">Patient</th>
+                    <th style="padding:12px;text-align:left;">Time</th>
+                    <th style="padding:12px;text-align:left;">Status</th>
+                    <th style="padding:12px;text-align:left;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appt in todays_appointments %}
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:12px;">{{ appt.patient.user.full_name }}</td>
+                    <td style="padding:12px;">{{ appt.appointment_time }}</td>
+                    <td style="padding:12px;">{{ appt.status }}</td>
+                    <td style="padding:12px;">
+                        {% if appt.status == 'Pending' %}
+                        <a href="{% url 'add_record' appt.appointment_id %}" class="view-profile" style="margin-right:8px;">Conduct</a>
+                        {% else %}
+                        <span style="color:#64748b;">-</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p style="color:#64748b;">No appointments for today.</p>
+        {% endif %}
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <h3>Quick Links</h3>
+        <div class="features-grid" style="grid-template-columns: repeat(4,1fr);">
+            <a href="{% url 'doctor_profile' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-user"></i></div><h3>Profile</h3></a>
+            <a href="{% url 'doctor_appointments' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-list"></i></div><h3>Appointments</h3></a>
+            <a href="{% url 'doctor_patients' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-users"></i></div><h3>Patients</h3></a>
+            <a href="{% url 'doctor_availability' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-clock"></i></div><h3>Availability</h3></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/doctor-detail.css' %}">{{ form.media }}{% endblock %}
+{% block title %}{{ doctor.doctor_name }} | WellPoint{% endblock %}
+{% block content %}
+
+<section class="breadcrumb-section">
+    <div class="page-container">
+        <a href="{% url 'doctor_list' %}"><i class="fa-solid fa-arrow-left"></i> Back to Doctors</a>
+    </div>
+</section>
+
+<main class="doctor-detail-page">
+    <div class="page-container">
+        <section class="doctor-profile-card">
+            <div class="doctor-profile-image">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d" alt="{{ doctor.doctor_name }}">
+            </div>
+            <div class="doctor-profile-info">
+                <div class="doctor-profile-top">
+                    <div>
+                        <p class="profile-label">HEALTHCARE PROFESSIONAL</p>
+                        <h1 id="doctorName">{{ doctor.doctor_name }}</h1>
+                        <p class="doctor-specialization" id="doctorSpecialization">
+                            {% for ds in specializations %}{{ ds.specialization_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                        </p>
+                    </div>
+                    <span class="availability-badge"><span></span> {{ availabilities|length }} Availability Slots</span>
+                </div>
+                <div class="doctor-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon star"><i class="fa-solid fa-star"></i></div>
+                        <div><strong>{{ avg_rating }}</strong><span>Rating</span></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon experience"><i class="fa-solid fa-briefcase-medical"></i></div>
+                        <div><strong>{{ doctor.experience }} Years</strong><span>Experience</span></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon patients"><i class="fa-solid fa-users"></i></div>
+                        <div><strong>{{ reviews|length }}</strong><span>Patients</span></div>
+                    </div>
+                </div>
+                <div class="doctor-profile-meta">
+                    {% for clinic in clinics %}
+                    <span><i class="fa-solid fa-hospital"></i> {{ clinic.clinic_name }}</span>
+                    {% endfor %}
+                    {% for q in qualifications %}
+                    <span><i class="fa-solid fa-graduation-cap"></i> {{ q.qualification_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <div class="detail-grid">
+            <div class="doctor-content">
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-user-doctor"></i></div><h2>About Doctor</h2></div>
+                    <p class="about-text">{{ doctor.about|default:"No description available." }}</p>
+                </section>
+
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-clock"></i></div><h2>Availability</h2></div>
+                    <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+                        <thead>
+                            <tr style="border-bottom:1px solid #e2e8f0;">
+                                <th style="padding:10px;text-align:left;">Day</th>
+                                <th style="padding:10px;text-align:left;">Clinic</th>
+                                <th style="padding:10px;text-align:left;">Start</th>
+                                <th style="padding:10px;text-align:left;">End</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for av in availabilities %}
+                            <tr style="border-bottom:1px solid #e2e8f0;">
+                                <td style="padding:10px;">{{ av.day.day_name }}</td>
+                                <td style="padding:10px;">{{ av.clinic.clinic_name }}</td>
+                                <td style="padding:10px;">{{ av.start_time|time:"H:i" }}</td>
+                                <td style="padding:10px;">{{ av.end_time|time:"H:i" }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="4" style="padding:10px;">No availability set.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
+
+                {% if reviews %}
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-star"></i></div><h2>Patient Reviews</h2></div>
+                    {% for review in reviews %}
+                    <div style="margin-bottom:15px;">
+                        <strong>{{ review.patient.user.full_name }}</strong>
+                        <span style="color:#f59e0b;">{{ review.rating }}/5 <i class="fa-solid fa-star"></i></span>
+                        <p style="color:#64748b;font-size:13px;">{{ review.review_text }}</p>
+                    </div>
+                    {% endfor %}
+                </section>
+                {% endif %}
+            </div>
+
+            <aside class="appointment-sidebar">
+                <div class="booking-card">
+                    <div class="booking-header">
+                        <div><p>CONSULTATION</p><h2>Book an Appointment</h2></div>
+                    </div>
+                    <div class="consultation-fee">
+                        <span>Consultation Fee</span>
+                        <strong>&#8376;{{ doctor.new_patient_fee }}</strong>
+                    </div>
+                    {% if current_user %}
+                    <a href="{% url 'book_appointment' doctor.doctor_id %}" class="book-now-btn">
+                        Continue to Book <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="book-now-btn">
+                        Login to Book <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    {% endif %}
+                    <p class="booking-note"><i class="fa-solid fa-shield-heart"></i> Your appointment details will be securely processed.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

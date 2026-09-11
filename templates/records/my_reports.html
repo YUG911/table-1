@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Reports | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>My Reports</h2>
+        <p>{{ patient.user.full_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        {% if reports %}
+        <div class="doctors-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+            {% for report in reports %}
+            <article class="doctor-card">
+                <div class="doctor-info">
+                    <h3>{{ report.report_name }}</h3>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-user-doctor"></i> Dr. {{ report.appointment.doctor.doctor_name }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-calendar"></i> {{ report.appointment.appointment_date }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-upload"></i> Uploaded by: {{ report.uploaded_by.full_name }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-clock"></i> {{ report.created_at|date:"M d, Y H:i" }}
+                    </p>
+                    {% if report.file_path %}
+                    <p><a href="{{ report.file_path }}" class="view-profile" style="margin-top:10px;display:inline-block;">Download Report</a></p>
+                    {% else %}
+                    <p style="color:#64748b;font-size:12px;">No file available.</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-results" style="display:block;text-align:center;padding:80px;">
+            <i class="fa-solid fa-file-medical" style="font-size:45px;color:#cbd5e1;"></i>
+            <h3>No Reports Found</h3>
+            <p>You have no medical reports yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

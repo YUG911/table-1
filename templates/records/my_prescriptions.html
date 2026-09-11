@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Prescriptions | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>My Prescriptions</h2>
+        <p>{{ patient.user.full_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        {% if prescriptions %}
+        <div class="doctors-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+            {% for pres in prescriptions %}
+            <article class="doctor-card">
+                <div class="doctor-info">
+                    <h3>Prescription #{{ pres.prescription_id }}</h3>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-user-doctor"></i> Dr. {{ pres.appointment.doctor.doctor_name }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-calendar"></i> {{ pres.appointment.appointment_date }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-user"></i> Uploaded by: {{ pres.uploaded_by.full_name }}
+                    </p>
+                    <p style="color:#64748b;font-size:13px;">
+                        <i class="fa-solid fa-clock"></i> {{ pres.created_at|date:"M d, Y H:i" }}
+                    </p>
+                    {% if pres.file_path %}
+                    <p><a href="{{ pres.file_path }}" class="view-profile" style="margin-top:10px;display:inline-block;">Download Prescription</a></p>
+                    {% else %}
+                    <p style="color:#64748b;font-size:12px;">No file uploaded yet.</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-results" style="display:block;text-align:center;padding:80px;">
+            <i class="fa-solid fa-file-prescription" style="font-size:45px;color:#cbd5e1;"></i>
+            <h3>No Prescriptions Found</h3>
+            <p>You have no prescriptions yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

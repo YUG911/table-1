@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/doctors.css' %}">{{ form.media }}{% endblock %}
+{% block title %}Find Doctors | WellPoint{% endblock %}
+{% block content %}
+
+<section class="search-hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <span class="section-label"><span></span> FIND HEALTHCARE</span>
+            <h1>Find the Right Doctor<span> for Your Health.</span></h1>
+            <p>Search trusted doctors, explore specialties, and book appointments with ease.</p>
+        </div>
+        <form class="search-box" method="get">
+            <div class="search-input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" name="search" placeholder="Search doctor or specialization" value="{{ request.GET.search|default:'' }}">
+            </div>
+            <div class="search-divider"></div>
+            <div class="location-input">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" id="locationInput" name="location" placeholder="Enter location" value="{{ request.GET.location|default:'' }}">
+            </div>
+            <button type="submit" class="search-button" id="searchButton">
+                <i class="fa-solid fa-magnifying-glass"></i><span>Search</span>
+            </button>
+        </form>
+    </div>
+</section>
+
+<main class="doctors-page">
+    <div class="doctors-container">
+        <aside class="filters">
+            <div class="filter-header">
+                <div><i class="fa-solid fa-sliders"></i><h3>Filters</h3></div>
+                <button id="clearFilters">Clear All</button>
+            </div>
+            <div class="filter-group">
+                <h4>Specialization</h4>
+                {% for s in specializations %}
+                <label class="checkbox-option">
+                    <input type="checkbox" class="specialization-filter" value="{{ s.specialization_name }}">
+                    <span class="custom-check"></span>{{ s.specialization_name }}
+                </label>
+                {% endfor %}
+            </div>
+            <div class="filter-group">
+                <h4>Location</h4>
+                {% for c in cities %}
+                <label class="checkbox-option">
+                    <input type="checkbox" class="location-filter" value="{{ c|lower }}">
+                    <span class="custom-check"></span>{{ c }}
+                </label>
+                {% endfor %}
+            </div>
+            <div class="filter-group">
+                <h4>Experience</h4>
+                <label class="radio-option"><input type="radio" name="experience" value="all" checked><span class="custom-radio"></span> Any Experience</label>
+                <label class="radio-option"><input type="radio" name="experience" value="1-5"><span class="custom-radio"></span> 1-5 Years</label>
+                <label class="radio-option"><input type="radio" name="experience" value="5-10"><span class="custom-radio"></span> 5-10 Years</label>
+                <label class="radio-option"><input type="radio" name="experience" value="10+"><span class="custom-radio"></span> 10+ Years</label>
+            </div>
+        </aside>
+
+        <section class="doctors-section">
+            <div class="results-header">
+                <div>
+                    <p class="results-label">AVAILABLE DOCTORS</p>
+                    <h2><span id="doctorCount">{{ doctors|length }}</span> Doctors Found</h2>
+                </div>
+            </div>
+            <div class="doctors-list" id="doctorsList">
+                {% for doctor in doctors %}
+                <article class="doctor-card"
+                    data-name="{{ doctor.doctor_name|lower }}"
+                    data-experience="{{ doctor.experience|default:0 }}"
+                    data-fee="{{ doctor.new_patient_fee }}">
+                    <div class="doctor-image">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d" alt="{{ doctor.doctor_name }}">
+                    </div>
+                    <div class="doctor-info">
+                        <div class="doctor-top">
+                            <div>
+                                <h3>{{ doctor.doctor_name }}</h3>
+                                <p class="specialization">
+                                    {% for ds in doctor.doctor_specialization.all %}
+                                    {{ ds.specialization.specialization_name }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            <span class="available-badge"><span></span> Available</span>
+                        </div>
+                        <div class="doctor-details">
+                            <span><i class="fa-solid fa-briefcase-medical"></i> {{ doctor.experience|default:'0' }} Years Experience</span>
+                            {% if doctor.doctor_clinic.first %}
+                            <span><i class="fa-solid fa-hospital"></i> {{ doctor.doctor_clinic.first.clinic.clinic_name }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="doctor-bottom">
+                            <div class="fee"><span>Consultation Fee</span><strong>&#8376;{{ doctor.new_patient_fee }}</strong></div>
+                            <div class="doctor-actions">
+                                <a href="{% url 'doctor_detail' doctor.doctor_id %}" class="view-profile">View Profile</a>
+                                {% if current_user %}
+                                <a href="{% url 'book_appointment' doctor.doctor_id %}" class="book-appointment">Book Appointment <i class="fa-solid fa-arrow-right"></i></a>
+                                {% else %}
+                                <a href="{% url 'login' %}" class="book-appointment">Book Appointment <i class="fa-solid fa-arrow-right"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% empty %}
+                <div class="no-results" style="display:block;">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <h3>No Doctors Found</h3>
+                    <p>Try changing your search or filters.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</main>
+
+<script src="{% static 'js/doctors.js' %}"></script>
+{% endblock %}

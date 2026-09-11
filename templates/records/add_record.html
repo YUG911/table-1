@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Add Record | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Add Patient Record</h2>
+        <p>Patient: {{ appointment.patient.user.full_name }} | Appointment: {{ appointment.appointment_date }}</p>
+    </div>
+
+    <form method="post" class="doctor-profile-card" style="padding:30px;">
+        {% csrf_token %}
+        {% if record_exists %}
+        <div style="margin-bottom:20px;">
+            <div class="content-card">
+                <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-file-medical"></i></div><h2>Existing Record</h2></div>
+                <p><strong>Diagnosis:</strong> {{ record.diagnosis }}</p>
+                <p><strong>Notes:</strong> {{ record.notes }}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="form-group">
+            <label for="diagnosis">Diagnosis</label>
+            <textarea name="diagnosis" class="form-control" rows="3" placeholder="Enter diagnosis..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea name="notes" class="form-control" rows="3" placeholder="Enter additional notes..."></textarea>
+        </div>
+        <button type="submit" class="book-now-btn">Save Record & Complete Appointment</button>
+        {% endif %}
+        <p class="booking-note" style="margin-top:15px;"><i class="fa-solid fa-info-circle"></i> This will mark the appointment as Completed.</p>
+    </form>
+</div>
+{% endblock %}

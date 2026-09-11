@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Clinic Dashboard | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Clinic Dashboard</h2>
+        <p>Welcome, {{ clinic.clinic_name }}!</p>
+    </div>
+
+    <div class="features-grid" style="grid-template-columns: repeat(3,1fr);margin-bottom:30px;">
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-user-doctor"></i></div>
+            <h3>{{ doctors.count }}</h3>
+            <p>Associated Doctors</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3>{{ clinic.appointment_set.count }}</h3>
+            <p>Total Appointments</p>
+        </div>
+        <div class="feature-card" style="text-align:center;">
+            <div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-clock"></i></div>
+            <h3>-</h3>
+            <p>Clinic Hours</p>
+        </div>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <h3>Associated Doctors</h3>
+        {% if doctors %}
+        <div class="doctors-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+            {% for doctor in doctors %}
+            <article class="doctor-card">
+                <div class="doctor-info" style="padding:20px;">
+                    <h3>{{ doctor.doctor_name }}</h3>
+                    <p class="specialization">
+                        {% for s in doctor.doctor_specialization.first %}{{ s.specialization.specialization_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    </p>
+                    <p class="clinic"><i class="fa-solid fa-indian-rupee"></i> New: ₹{{ doctor.new_patient_fee }} | Old: ₹{{ doctor.old_patient_fee }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color:#64748b;">No doctors associated with this clinic yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Doctor Profile</h2>
+        <p>Welcome, Dr. {{ doctor.doctor_name }}!</p>
+    </div>
+
+    <div class="doctor-profile-card" style="padding:30px;">
+        <div class="doctor-profile-info">
+            <div class="doctor-profile-top">
+                <div>
+                    <h1>{{ doctor.doctor_name }}</h1>
+                    <p class="doctor-specialization">
+                        {% for ds in specializations %}{{ ds.specialization.specialization_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    </p>
+                </div>
+            </div>
+            <div class="doctor-profile-meta">
+                <span><i class="fa-solid fa-briefcase-medical"></i> {{ doctor.experience }} Years</span>
+                <span><i class="fa-solid fa-indian-rupee"></i> New: &#8376;{{ doctor.new_patient_fee }} | Old: &#8376;{{ doctor.old_patient_fee }}</span>
+                {% for clinic in clinics %}
+                <span><i class="fa-solid fa-hospital"></i> {{ clinic.clinic.clinic_name }}</span>
+                {% endfor %}
+            </div>
+            <div style="margin-top:20px;">
+                <h3>Qualifications</h3>
+                <div class="specialization-tags">
+                    {% for q in qualifications %}
+                    <span>{{ q.qualification.qualification_name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div style="margin-top:20px;">
+                <h3>About</h3>
+                <p style="color:#64748b;">{{ doctor.about|default:"No information provided." }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <h3>Quick Links</h3>
+        <div class="features-grid" style="grid-template-columns: repeat(3,1fr);">
+            <a href="{% url 'doctor_availability' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-clock"></i></div><h3>Manage Availability</h3></a>
+            <a href="{% url 'doctor_appointments' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-calendar"></i></div><h3>View Appointments</h3></a>
+            <a href="{% url 'doctor_patients' %}" class="feature-card"><div class="feature-icon" style="margin:0 auto;"><i class="fa-solid fa-users"></i></div><h3>My Patients</h3></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

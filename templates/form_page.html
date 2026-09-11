@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/form-pages.css' %}">{{ form.media }}{% endblock %}
+{% block title %}{{ title }} | WellPoint{% endblock %}
+{% block content %}
+
+<div class="login-page">
+    <section class="login-section">
+        <div class="login-container">
+            <div class="top-section">
+                <a href="{% url 'home' %}" class="logo"><span class="logo-icon"><i class="fa-solid fa-plus"></i></span><span>WellPoint</span></a>
+                <a href="{% url 'home' %}" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            </div>
+            <div class="login-content">
+                <div class="login-heading">
+                    <span class="welcome-label"><span></span> {{ label }}</span>
+                    <h1>{{ heading }}</h1>
+                    <p>{{ description }}</p>
+                </div>
+                <form method="post" class="login-form">{% csrf_token %}
+                    {% if form.non_field_errors %}<div class="error">{{ form.non_field_errors }}</div>{% endif %}
+                    {{ form.as_p }}
+                    <button type="submit" class="login-button"><span>{{ submit_text }}</span><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <p class="signup-text">{{ extra_link_text }} <a href="{{ extra_link_url }}">{{ extra_link_label }}</a></p>
+            </div>
+            <div class="login-footer"><p>&copy; 2026 WellPoint</p></div>
+        </div>
+    </section>
+    <section class="visual-section">
+        <div class="shape shape-one"></div>
+        <div class="shape shape-two"></div>
+        <div class="shape shape-three"></div>
+        <div class="visual-content">
+            <div class="patient-visual"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d" alt="Healthcare"></div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

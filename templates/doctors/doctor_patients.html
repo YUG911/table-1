@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Patients | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>My Patients</h2>
+        <p>Dr. {{ doctor.doctor_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        {% if patients %}
+        <div class="doctors-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+            {% for patient in patients %}
+            <article class="doctor-card">
+                <div class="doctor-image">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf3c7069" alt="{{ patient.user.full_name }}">
+                </div>
+                <div class="doctor-info">
+                    <h3>{{ patient.user.full_name }}</h3>
+                    <p class="specialization">{{ patient.gender|default:'' }} | {{ patient.blood_group|default:'' }}</p>
+                    <p class="doctor-location"><i class="fa-solid fa-phone"></i> {{ patient.emergency_contact|default:'N/A' }}</p>
+                    <div class="doctor-bottom">
+                        <div class="doctor-actions">
+                            <a href="{% url 'my_appointments' %}" class="view-profile">View History</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color:#64748b;">No patients found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

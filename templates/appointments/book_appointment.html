@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Book Appointment | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <section class="breadcrumb-section" style="padding:15px 0;">
+        <a href="{% url 'doctor_list' %}"><i class="fa-solid fa-arrow-left"></i> Back to Doctors</a>
+    </section>
+
+    <div class="doctor-profile-card" style="padding:30px;">
+        <div class="doctor-profile-top">
+            <div>
+                <p class="profile-label">CONSULTATION</p>
+                <h1>Book an Appointment</h1>
+                <p style="color:#64748b;">Doctor: {{ doctor.doctor_name }}</p>
+                <p><strong>Fee:</strong> &#8376;{{ doctor.new_patient_fee }} (new) / &#8376;{{ doctor.old_patient_fee }} (old)</p>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" style="margin-top:20px;" id="bookingForm">
+        {% csrf_token %}
+        <div class="detail-grid" style="grid-template-columns:1fr 300px;">
+            <div class="doctor-content">
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-hospital"></i></div><h2>1. Select Clinic</h2></div>
+                    {% for c in clinics %}
+                    <label class="checkbox-option">
+                        <input type="radio" name="clinic_id" value="{{ c.clinic.clinic_id }}">
+                        <span class="custom-check"></span>{{ c.clinic.clinic_name }}
+                    </label>
+                    {% endfor %}
+                </section>
+
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-user"></i></div><h2>2. Patient Type</h2></div>
+                    <div style="display:flex;gap:15px;">
+                        <label class="radio-option"><input type="radio" name="patient_type" value="New" checked><span class="custom-radio"></span>New Patient</label>
+                        <label class="radio-option"><input type="radio" name="patient_type" value="Old"><span class="custom-radio"></span>Old Patient</label>
+                    </div>
+                </section>
+
+                {% if available_slots %}
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-calendar"></i></div><h2>3. Select Date & Time</h2></div>
+                    {% for date_str, slot_data in available_slots.items %}
+                    <div style="margin-bottom:15px;">
+                        <strong>{{ slot_data.date|date:"D, M d, Y" }}</strong>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;">
+                            {% for slot in slot_data.slots %}
+                            <label class="time-slot-label">
+                                <input type="radio" name="appointment_time" value="{{ slot }}"
+                                    onchange="setDate('{{ date_str }}', '{{ slot }}')" required>
+                                {{ slot }}
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <input type="hidden" name="appointment_date" id="selectedDateInput" value="">
+                    <input type="hidden" name="appointment_time_hidden" id="selectedTimeInput" value="">
+                </section>
+
+                <section class="content-card">
+                    <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-stethoscope"></i></div><h2>4. Symptoms (optional)</h2></div>
+                    <textarea name="symptoms" class="form-control" rows="3" placeholder="Describe your symptoms..."></textarea>
+                </section>
+                {% else %}
+                <section class="content-card">
+                    <p style="color:#64748b;">No available slots found. Please check back later.</p>
+                </section>
+                {% endif %}
+            </div>
+
+            <aside class="appointment-sidebar">
+                <div class="booking-card">
+                    <div class="booking-header"><div><p>PATIENT</p><h2>{{ patient.user.full_name }}</h2></div></div>
+                    <div class="consultation-fee">
+                        <span>Consultation Fee</span>
+                        <strong>&#8376;{{ doctor.new_patient_fee }}</strong>
+                    </div>
+                    <button type="submit" class="book-now-btn" id="submitBtn">Confirm & Book Appointment</button>
+                    <p class="booking-note"><i class="fa-solid fa-shield-heart"></i> Secure appointment booking.</p>
+                </div>
+            </aside>
+        </div>
+    </form>
+</div>
+
+<style>
+.time-slot-label {
+    display: block; padding: 10px; background: white;
+    border: 1px solid #e2e8f0; border-radius: 8px;
+    text-align: center; cursor: pointer; transition: 0.3s;
+    font-size: 13px;
+}
+.time-slot-label input[type="radio"] { display: none; }
+.time-slot-label:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+.time-slot-label.selected { background: #2563eb; color: white; border-color: #2563eb; }
+</style>
+
+<script>
+function setDate(dateStr, timeStr) {
+    document.getElementById('selectedDateInput').value = dateStr;
+    document.getElementById('selectedTimeInput').value = timeStr;
+    document.querySelectorAll('.time-slot-label').forEach(function(el) {
+        el.classList.remove('selected');
+        if (el.querySelector('input').value === timeStr) el.classList.add('selected');
+    });
+}
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    if (!document.getElementById('selectedDateInput').value) {
+        e.preventDefault();
+        alert('Please select a date and time slot.');
+    }
+});
+</script>
+{% endblock %}

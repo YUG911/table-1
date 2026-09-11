@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>My Profile</h2>
+        <p>Manage your personal information.</p>
+    </div>
+
+    <div class="doctor-profile-card" style="padding:30px;">
+        <div style="display:flex;gap:30px;align-items:center;">
+            <div class="doctor-profile-image">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf3c7069" alt="Profile">
+            </div>
+            <div class="doctor-profile-info">
+                <h1>{{ user.full_name }}</h1>
+                <p class="doctor-specialization">{{ user.role.role_name }}</p>
+                <p style="color:#64748b;margin:10px 0;"><i class="fa-solid fa-envelope"></i> {{ user.email }}</p>
+                <p style="color:#64748b;margin:10px 0;"><i class="fa-solid fa-phone"></i> {{ user.phone }}</p>
+                <p style="color:#64748b;margin:5px 0 0;"><i class="fa-solid fa-location-dot"></i> {{ user.address|default:'No address provided' }}</p>
+                <p style="margin-top:15px;"><span class="available-badge">
+                    {% if user.is_verified %}
+                    Verified Account
+                    {% else %}
+                    Pending Verification
+                    {% endif %}
+                </span></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Manage Availability | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Manage Availability</h2>
+        <p>Dr. {{ doctor.doctor_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        <div class="content-card">
+            <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-clock"></i></div><h2>Set Your Availability</h2></div>
+            <form method="post">{% csrf_token %}
+                {% for day in days %}
+                <div class="input-wrapper" style="margin-bottom:15px;">
+                    <strong>{{ day.day_name }}:</strong>
+                    <div style="display:flex;gap:10px;align-items:center;">
+                        <input type="time" name="start_{{ day.day_id }}" class="form-control" style="width:120px;">
+                        <span>-</span>
+                        <input type="time" name="end_{{ day.day_id }}" class="form-control" style="width:120px;">
+                        <label style="font-size:13px;">Clinics:</label>
+                        {% for c in clinics %}
+                        <label style="display:flex;align-items:center;gap:5px;font-size:13px;">
+                            <input type="checkbox" name="clinics_{{ day.day_id }}" value="{{ c.clinic_id }}">
+                            {{ c.clinic_name }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="book-now-btn" style="width:auto;">Save Availability</button>
+            </form>
+        </div>
+
+        <div class="content-card" style="margin-top:20px;">
+            <div class="card-heading"><div class="heading-icon"><i class="fa-solid fa-list"></i></div><h2>Current Availability</h2></div>
+            {% if existing_availability %}
+            <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+                <thead><tr style="border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:10px;text-align:left;">Day</th>
+                    <th style="padding:10px;text-align:left;">Clinic</th>
+                    <th style="padding:10px;text-align:left;">Start</th>
+                    <th style="padding:10px;text-align:left;">End</th>
+                </tr></thead>
+                <tbody>
+                    {% for av in existing_availability %}
+                    <tr style="border-bottom:1px solid #e2e8f0;">
+                        <td style="padding:10px;">{{ av.day.day_name }}</td>
+                        <td style="padding:10px;">{{ av.clinic.clinic_name }}</td>
+                        <td style="padding:10px;">{{ av.start_time|time:"H:i" }}</td>
+                        <td style="padding:10px;">{{ av.end_time|time:"H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p style="color:#64748b;">No availability set yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

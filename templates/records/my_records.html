@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}My Records | WellPoint{% endblock %}
+{% block content %}
+<div class="page-container" style="padding:40px 30px;">
+    <div class="section-heading">
+        <h2>Medical Records</h2>
+        <p>{{ patient.user.full_name }}</p>
+    </div>
+
+    <div class="section" style="padding:40px 0;">
+        {% if records %}
+        <table class="dashboard-table" style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f8fafc;border-bottom:2px solid #e2e8f0;">
+                    <th style="padding:12px;text-align:left;">Doctor</th>
+                    <th style="padding:12px;text-align:left;">Appointment</th>
+                    <th style="padding:12px;text-align:left;">Diagnosis</th>
+                    <th style="padding:12px;text-align:left;">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr style="border-bottom:1px solid #e2e8f0;">
+                    <td style="padding:12px;">Dr. {{ record.doctor.doctor_name }}</td>
+                    <td style="padding:12px;">{{ record.appointment.appointment_date }} {{ record.appointment.appointment_time|time:"H:i" }}</td>
+                    <td style="padding:12px;">{{ record.diagnosis|default:'N/A' }}</td>
+                    <td style="padding:12px;">{{ record.notes|default:'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-results" style="display:block;text-align:center;padding:80px;">
+            <i class="fa-solid fa-folder-medical" style="font-size:45px;color:#cbd5e1;"></i>
+            <h3>No Records Found</h3>
+            <p>You have no medical records yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
